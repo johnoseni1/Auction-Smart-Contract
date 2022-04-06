@@ -1,0 +1,21 @@
+async function main() {
+  const [deployer] = await ethers.getSigners();
+
+  console.log("Deploying contracts with the account:", deployer.address);
+
+  console.log("Account balance:", (await deployer.getBalance()).toString());
+
+  const Auction = await ethers.getContractFactory("Auction");
+  const nftAuction = await Auction.deploy();
+
+  //verify: npx hardhat verify --network rinkeby DEPLOYED_CONTRACT_ADDRESS
+  console.log("nftAuction address:", nftAuction.address);
+
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
